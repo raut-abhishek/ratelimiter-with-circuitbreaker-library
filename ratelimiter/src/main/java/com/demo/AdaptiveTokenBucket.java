@@ -26,15 +26,12 @@ public class AdaptiveTokenBucket {
 
 	public double getEffectiveCapacity() {
 		double load = getCpuLoad();
-		switch (load) {
-			case load > cpuLoadHigh:
-				return (baseCapasity / 100) * 20;
-			case load > cpuLoadMed:
-				return (baseCapasity / 100) * 50;
-			case load < cpuLoadMed:
-				return (baseCapasity / 100) * 100;
-			default:
-				return (baseCapasity / 100) * 100;
+		if (load >= cpuLoadHigh) {
+			return baseCapasity * 0.2;
+		} else if (load >= cpuLoadMed) {
+			return baseCapasity * 0.5;
+		} else {
+			return baseCapasity;
 		}
 
 	}
