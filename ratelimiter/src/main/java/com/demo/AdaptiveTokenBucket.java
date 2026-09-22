@@ -36,4 +36,24 @@ public class AdaptiveTokenBucket {
 
 	}
 
+	private void refill() {
+		long now = System.currentTimeMillis();
+		double elapsedSeconds = (now - lastRefillTimeStamp) / 1000.0;
+		double tokensToAdd = elapsedSeconds * getEffectiveRefillRate();
+		tokens = Math.min(getEffectiveCapacity(), tokens + tokensToAdd);
+		lastRefillTimeStamp = now;
+	}
+
+	public double getEffectiveRefillRate() {
+		double load = getCpuLoad();
+
+		if (load >= cpuLoadHigh) {
+			return baseRefillRate * 0.2;
+		} else if (load >= cpuLoadMed) {
+			return baseRefillRate * 0.5;
+		} else {
+			return baseRefillRate;
+		}
+	}
+
 }
