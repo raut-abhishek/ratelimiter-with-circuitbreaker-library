@@ -1,7 +1,7 @@
 package com.demo;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 
 public class AdaptiveTokenBucket {
 	private final double cpuLoadMed = 0.5;
@@ -19,7 +19,7 @@ public class AdaptiveTokenBucket {
 	}
 
 	private double getCpuLoad() {
-		com.sun.management.OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory
+		OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory
 				.getOperatingSystemMXBean();
 		return osBean.getCpuLoad();
 	}
