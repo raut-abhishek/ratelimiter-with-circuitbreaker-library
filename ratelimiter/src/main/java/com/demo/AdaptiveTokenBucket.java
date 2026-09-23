@@ -24,7 +24,7 @@ public class AdaptiveTokenBucket {
 		return osBean.getCpuLoad();
 	}
 
-	public double getEffectiveCapacity() {
+	private double getEffectiveCapacity() {
 		double load = getCpuLoad();
 		if (load >= cpuLoadHigh) {
 			return baseCapasity * 0.2;
@@ -44,7 +44,7 @@ public class AdaptiveTokenBucket {
 		lastRefillTimeStamp = now;
 	}
 
-	public double getEffectiveRefillRate() {
+	private double getEffectiveRefillRate() {
 		double load = getCpuLoad();
 
 		if (load >= cpuLoadHigh) {
@@ -55,5 +55,8 @@ public class AdaptiveTokenBucket {
 			return baseRefillRate;
 		}
 	}
+	
+	
+
 
 }
