@@ -57,6 +57,14 @@ public class AdaptiveTokenBucket {
 	}
 	
 	
-
+	public synchronized boolean tryConsume() {
+		refill();
+		if(tokens >=1) {
+			tokens -= 1;
+			return true;	
+		}else {
+			return false;
+		}
+	}
 
 }
