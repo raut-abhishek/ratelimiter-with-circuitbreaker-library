@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class SlidingWindowLimiter {
+public class SlidingWindowLimiter implements RateLimiter{
 	private final int maxRequests;
 	private final long wondowSizeInMillis;
 	private final Queue<Long> timeStamps;

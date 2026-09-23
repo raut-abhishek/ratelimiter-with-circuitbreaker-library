@@ -3,7 +3,7 @@ package com.demo;
 import java.lang.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
 
-public class AdaptiveTokenBucket {
+public class AdaptiveTokenBucket implements RateLimiter{
 	private final double cpuLoadMed = 0.5;
 	private final double cpuLoadHigh = 0.8;
 	private final int baseCapasity;

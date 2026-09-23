@@ -1,6 +1,6 @@
 package com.demo;
 
-public class TockenBucket {
+public class TockenBucket implements RateLimiter{
 	private final int capasity;
 	private final double refillRatePerSecond;
 	private double tokens;
