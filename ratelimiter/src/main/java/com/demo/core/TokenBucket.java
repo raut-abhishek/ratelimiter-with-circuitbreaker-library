@@ -1,12 +1,12 @@
 package com.demo.core;
 
-public class TockenBucket implements RateLimiter{
+public class TokenBucket implements RateLimiter{
 	private final int capasity;
 	private final double refillRatePerSecond;
 	private double tokens;
 	private long lastRefillTimeStamp;
 
-	public TockenBucket(int capasity, double refillRatePerSecond) {
+	public TokenBucket(int capasity, double refillRatePerSecond) {
 		this.capasity = capasity;
 		this.refillRatePerSecond = refillRatePerSecond;
 		this.tokens = capasity;
