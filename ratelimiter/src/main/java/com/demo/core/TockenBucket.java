@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.core;
 
 public class TockenBucket implements RateLimiter{
 	private final int capasity;

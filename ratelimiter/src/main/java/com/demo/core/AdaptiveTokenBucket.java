@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.core;
 
 import java.lang.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
