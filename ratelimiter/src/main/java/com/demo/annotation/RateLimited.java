@@ -11,6 +11,6 @@ public @interface RateLimited {
 
 	int capacity() default 5;
 
-	double refillRaate() default 1;
+	double refillRate() default 1;
 
 }
