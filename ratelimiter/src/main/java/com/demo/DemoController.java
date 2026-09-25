@@ -13,8 +13,8 @@ import com.demo.aspect.RateLimitExceedException;
 public class DemoController {
 	
 	@RateLimited(capacity=3, refillRate = 1)
-	@GetMapping("/hello")
-	public String hello() {
+	@GetMapping("/home")
+	public String home() {
 		return "Request allowed!";
 	}
 	
