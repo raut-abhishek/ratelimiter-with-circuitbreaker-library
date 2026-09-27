@@ -29,6 +29,18 @@ public class DemoController {
 		}
 		return "Success";
 	}
+	
+	@RateLimited(capacity = 2, refillRate = 1, key = "#userId")
+	@GetMapping("/greet")
+	public String greet(@RequestParam String userId) {
+		return "Hello " + userId + "!";
+	}
+
+	@GetMapping("/")
+	public String m1() {
+		return "Hey ";
+	}
+	
 
 	@ExceptionHandler(RateLimitExceedException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
