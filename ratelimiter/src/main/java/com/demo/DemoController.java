@@ -22,8 +22,8 @@ public class DemoController {
 	}
 
 	@CircuitBreakerProtected(threshold = 5, cooldownTime = 5000)
-	@GetMapping("/risky")
-	public String risky(@RequestParam(defaultValue = "false") boolean fail) {
+	@GetMapping("/test")
+	public String test(@RequestParam(defaultValue = "false") boolean fail) {
 		if (fail) {
 			throw new RuntimeException("Simulated Failure!");
 		}
