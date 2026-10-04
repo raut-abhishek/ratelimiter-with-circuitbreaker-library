@@ -1,5 +1,7 @@
 package com.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +13,32 @@ import com.demo.annotation.CircuitBreakerProtected;
 import com.demo.annotation.RateLimited;
 import com.demo.aspect.CircuitBreakerOpenException;
 import com.demo.aspect.RateLimitExceedException;
+import com.demo.core.RedisTokenBucket;
 
 @RestController
 public class DemoController {
+	
+	
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
+	private RedisTokenBucket redisBucket;
+	@GetMapping("/redis-test")
+	public String redisTest() {
+		if(redisBucket == null) {
+			redisBucket = new RedisTokenBucket("redistest", 1,1, redisTemplate);
+		}
+		if(redisBucket.tryConsume()) {
+			return "Allowed!!!";
+		}
+		else {
+			return "Rejected - rate limit excedded!!";
+		}
+	}
+	
+	
+	
+	
+	
 
 	@RateLimited(capacity = 3, refillRate = 1)
 	@GetMapping("/home")
