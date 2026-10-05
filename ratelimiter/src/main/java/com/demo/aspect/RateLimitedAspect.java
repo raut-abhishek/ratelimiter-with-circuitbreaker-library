@@ -42,7 +42,7 @@ public class RateLimitedAspect {
 		if (bucket.tryConsume()) {
 			return joinPoint.proceed();
 		} else {
-			throw new RateLimitExceedException("Rate limit exceeded for " + key);
+			throw new RateLimitExceededException("Rate limit exceeded for " + key);
 		}
 
 	}
