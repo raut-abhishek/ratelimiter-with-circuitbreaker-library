@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.annotation.CircuitBreakerProtected;
 import com.demo.annotation.RateLimited;
 import com.demo.aspect.CircuitBreakerOpenException;
-import com.demo.aspect.RateLimitExceedException;
+import com.demo.aspect.ErrorResponse;
+import com.demo.aspect.RateLimitExceededException;
 import com.demo.core.RedisTokenBucket;
 
 @RestController
@@ -67,15 +68,15 @@ public class DemoController {
 	}
 	
 
-	@ExceptionHandler(RateLimitExceedException.class)
+	@ExceptionHandler(RateLimitExceededException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
-	public String handleRateLimitException(RateLimitExceedException ex) {
-		return ex.getMessage();
+	public ErrorResponse handleRateLimitException(RateLimitExceededException ex) {
+		return new ErrorResponse(429, "Too Many Requests", ex.getMessage());
 	}
 
 	@ExceptionHandler(CircuitBreakerOpenException.class)
 	@ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-	public String handleCircuitBreakerOpen(CircuitBreakerOpenException ex) {
-		return ex.getMessage();
+	public ErrorResponse handleCircuitBreakerOpen(CircuitBreakerOpenException ex) {
+		return new ErrorResponse(503,"Service Unavailable", ex.getMessage());
 	}
 }
