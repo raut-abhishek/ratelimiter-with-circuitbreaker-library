@@ -31,7 +31,7 @@ public class DemoController {
 			return "Allowed!!!";
 		}
 		else {
-			return "Rejected - rate limit excedded!!";
+			return "Rejected - rate limit exceeded!!";
 		}
 	}
 	
